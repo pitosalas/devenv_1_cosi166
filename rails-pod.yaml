@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pitosalas-devenv
+  namespace: default
+  labels:
+    user: pitosalas
+spec:
+  containers:
+    - image: pitosalas/rails-image
+      name: rails-pod
+      ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+      volumeMounts:
+        - mountPath: "/app"
+          name: "devenv-data"
+  volumes:
+    - name: "devenv-data"
+      hostPath:
+        path: "/var/lib/devenv/pitosalas"

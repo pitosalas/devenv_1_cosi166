@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Service
+metadata:
+  namespace: k3s-test
+  name: rails-pod
+  labels:
+    run: rails-pod
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8080
+    targetPort: 8080
+    name: http
+  - port: 22
+    targetPort: 22
+    name: ssh
+    protocol: TCP
+  selector:
+    app: rails-pod

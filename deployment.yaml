@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: k3s-test
+  name: rails-pod
+  labels:
+    run: rails-pod
+spec:
+  selector:
+    matchLabels:
+      run: rails-pod
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        run: rails-pod
+    spec:
+      containers:
+      - name: rails-pod
+        image: pitosalas/rails-image
+        ports:
+          - containerPort: 8080
